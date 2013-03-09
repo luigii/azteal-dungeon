@@ -21,6 +21,7 @@ import android.graphics.Point;
 import android.os.Build;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2) public class GameActivity extends BaseGameActivity {
 	
@@ -48,12 +49,13 @@ import android.view.KeyEvent;
 		System.out.println("dimensions : " + WIDTH + " , " + HEIGHT);
 		
 		cam = new Camera(0, 0, WIDTH, HEIGHT);
-	    EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(WIDTH, HEIGHT), this.cam);
+	    EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(WIDTH/2, HEIGHT/2), this.cam);
 	    //engineOptions.getAudioOptions().setNeedsMusic(true).setNeedsSound(true);
 	    engineOptions.setWakeLockOptions(WakeLockOptions.SCREEN_ON);
 	    return engineOptions;
 		
 	}
+	
 
 	@Override
 	public void onCreateResources(OnCreateResourcesCallback pOnCreateResourcesCallback) throws IOException {

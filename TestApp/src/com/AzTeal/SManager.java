@@ -1,6 +1,8 @@
 package com.AzTeal;
 
 import org.andengine.engine.*;
+import org.andengine.engine.handler.timer.ITimerCallback;
+import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.ui.IGameInterface.OnCreateSceneCallback;
 
 public class SManager {
@@ -98,6 +100,17 @@ public class SManager {
     	RManager.get().loadLoad();
     	loadingScene = new LoadScreen();
     	setScene(loadingScene);
+    	
+    	engine.registerUpdateHandler(new TimerHandler(0.1f, new ITimerCallback() 
+        {
+            public void onTimePassed(final TimerHandler pTimerHandler) 
+            {
+                engine.unregisterUpdateHandler(pTimerHandler);
+                RManager.get().loadGame();
+                gameScene = new GameScene();
+                setScene(gameScene);
+            }
+        }));
     	
     	}
     }

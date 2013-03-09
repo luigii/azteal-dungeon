@@ -15,7 +15,7 @@ public class LoadScreen extends BaseScene {
 		
 		setBackground(new Background(Color.BLACK));	
 		load = new Sprite(0,0,resources.load_region,vbom);		        
-		load.setScale(1.5f);
+		load.setScale(1.5f);									
 		load.setPosition(cam.getCenterX()-RManager.BADGE_OFFSET,cam.getCenterY());
 		attachChild(load);
 		
