@@ -1,57 +1,66 @@
 package com.AzTeal;
 
+import org.andengine.engine.handler.physics.PhysicsHandler;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.util.color.Color;
 
-public class Player{ //extends AnimatedSprite {
-	
-//	private Body body;
-
-//	public Player(float pX, float pY, VertexBufferObjectManager vbo, Camera camera)
-//    {
-//        super(pX, pY, RManager.get().player_region, vbo);
-//    }
+public class Player{ 
 	
 	private float startX;
 	private float startY;
-	private float rotation;
+	
+	private final int boundryLeft;
+	private final int boundryRight;
+	private final int boundryTop;
+	private final int boundryBottom;
+	
+	final PhysicsHandler physicsHandler;
 	public Sprite player;
 	
-	public Player(Sprite player, float x, float y){
+	public Player(Sprite player, float x, float y, int left, int right, int top, int bottom){
 		
 		this.player = player;
+		physicsHandler = new PhysicsHandler(player);
+		player.registerUpdateHandler(physicsHandler);
 		this.startX = x;
 		this.startY = y;
 		this.player.setPosition(startX, startY);
 		
+		boundryLeft = left;
+		boundryRight = right;
+		boundryTop = top;
+		boundryBottom = bottom;
+		
 	}
 	
-	public void move(int direction){
+	public void move(float X, float Y){	
 		
-		
-		switch (direction) {
+		while(player.getX() < boundryLeft){
 			
-		case 1: player.setPosition(player.getX(), player.getY() - 32);
-				player.setColor(Color.CYAN);
-				rotation += 30;
-				break;
-		case 2: player.setPosition(player.getX(), player.getY() + 32);
-				player.setColor(Color.PINK);
-				rotation -= 30;
-				break;
-		case 3: player.setPosition(player.getX() + 32, player.getY());
-				player.setColor(Color.GREEN);
-				rotation += 30;
-				break;
-		case 4: player.setPosition(player.getX() - 32, player.getY());
-				player.setColor(Color.RED);
-				rotation -= 30;
-				break;		
-		
+			player.setPosition(boundryLeft, player.getY());
+			
 		}
 		
-		player.setRotation(rotation);
+		while(player.getX() > boundryRight){
+			
+			player.setPosition(boundryRight, player.getY());
+			
+		}
+		
+		while(player.getY() < boundryTop){
+			
+			player.setPosition(player.getX(), 65);
+				
+		}
+		
+		while(player.getY() > boundryBottom){
+			
+			player.setPosition(player.getX(), 610);
+				
+		}
+		
+		physicsHandler.setVelocity(X, Y);	
 		
 	}
-	
+		
 }

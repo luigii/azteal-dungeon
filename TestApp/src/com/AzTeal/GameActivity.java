@@ -9,19 +9,16 @@ import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.WakeLockOptions;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
-import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.BaseGameActivity;
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
-import org.andengine.opengl.texture.*;
 
 import android.annotation.TargetApi;
 import android.graphics.Point;
 import android.os.Build;
+import android.util.Log;
 import android.view.Display;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2) public class GameActivity extends BaseGameActivity {
 	
@@ -46,7 +43,7 @@ import android.view.MotionEvent;
 		display.getSize(size);
 		WIDTH = size.x;
 		HEIGHT = size.y;
-		System.out.println("dimensions : " + WIDTH + " , " + HEIGHT);
+		Log.d("Dimensions","dimensions : " + WIDTH + " , " + HEIGHT);
 		
 		cam = new Camera(0, 0, WIDTH, HEIGHT);
 	    EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(WIDTH/2, HEIGHT/2), this.cam);

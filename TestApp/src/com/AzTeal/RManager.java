@@ -34,7 +34,9 @@ public class RManager {
 	public ITextureRegion options_region;
 	public ITextureRegion load_region;
 	public ITextureRegion control_region;
+	public ITextureRegion knob_region;
 	public ITextureRegion player_region;
+	public ITextureRegion bg_region;
 	//public ITiledTextureRegion player_region;
 	public final static int BADGE_OFFSET = 128;
 	public final static int CONTROLLER_OFFSET = 128;
@@ -44,6 +46,7 @@ public class RManager {
 	private BitmapTextureAtlas splashTextureAtlas;
 	private BitmapTextureAtlas loadingTextureAtlas;
 	private BitmapTextureAtlas controlTextureAtlas;
+	private BitmapTextureAtlas levelTextureAtlas;
 	private BitmapTextureAtlas playerTextureAtlas;
 	
 	public void loadMenu(){
@@ -81,15 +84,22 @@ public class RManager {
 		this.font.load();
 
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/Player/");
-		playerTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+		playerTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 80, 80, TextureOptions.BILINEAR);
 		player_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(playerTextureAtlas, activity, "player.png", 0, 0);
 		              //BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(playerTextureAtlas, activity, "player.png", 3, 1);
 		playerTextureAtlas.load();
 		
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/Controller/");
-		controlTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR);
+		controlTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		control_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(controlTextureAtlas, activity, "Controller.png", 0, 0);
+		knob_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(controlTextureAtlas, activity, "Knob.png", 128, 0);
 		controlTextureAtlas.load();
+		
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/level/");
+		levelTextureAtlas = new BitmapTextureAtlas(activity.getTextureManager(), 1280, 800,TextureOptions.BILINEAR);
+		bg_region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(levelTextureAtlas, activity, "Dungeon.png", 0, 0);
+		levelTextureAtlas.load();
+		
 
 	}
 	
